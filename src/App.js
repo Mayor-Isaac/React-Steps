@@ -3,6 +3,7 @@ const messages = [
   "Learn React ⚛️",
   "Apply for jobs 💼",
   "Invest your new income 🤑",
+  "Enjoy life till last 😀",
 ];
 
 export default function App() {
@@ -25,29 +26,30 @@ export default function App() {
       {isOpen && (
         <div className="steps">
           <div className="numbers">
-            <div className={step >= 1 ? "active" : ""}>1</div>
-            <div className={step >= 2 ? "active" : ""}>2</div>
-            <div className={step >= 3 ? "active" : ""}>3</div>
+            {messages.map((_, i) => (
+              <div className={step >= i + 1 ? "active" : ""}>{i + 1}</div>
+            ))}
           </div>
           <p className="message">
             Step {step}: {messages[step - 1]}
           </p>
           <div className="buttons">
-            <button
-              onClick={previousFunction}
-              style={{ backgroundColor: "#7950f2", color: "#fff" }}
-            >
-              Previous
-            </button>
-            <button
-              onClick={nextFunction}
-              style={{ backgroundColor: "#7950f2", color: "#fff" }}
-            >
-              Next
-            </button>
+            <Button func={previousFunction} text={"Previous"} />
+            <Button func={nextFunction} text={"Next"} />
           </div>
         </div>
       )}
     </>
+  );
+}
+
+function Button({ func, text }) {
+  return (
+    <button
+      onClick={func}
+      style={{ backgroundColor: "#7950f2", color: "#fff" }}
+    >
+      {text}
+    </button>
   );
 }
